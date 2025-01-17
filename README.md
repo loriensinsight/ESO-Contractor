@@ -1,6 +1,6 @@
 # ESO 包工头
 
-## 这是干嘛的：
+## 这是干嘛的
 
 一个装修工具，可以从各个维度筛选家具，可以标记你已经有了的，或者你想要的，方便你猛猛装修
 ![image](https://github.com/user-attachments/assets/a198c02d-0e03-4d95-89c2-d276d8c135d3)
