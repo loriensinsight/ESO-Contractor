@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家具查询</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        .search-form input, .search-form select {
+            margin-right: 10px;
+            padding: 5px;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .item h3 {
+            margin: 0 0 10px 0;
+        }
+        .item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>家具查询</h1>
+    <form class="search-form" id="searchForm">
+        <input type="text" name="f_name_zh" placeholder="名称">
+        <input type="text" name="get_category_zh" placeholder="分类大类">
+        <input type="text" name="sub_category_zh" placeholder="分类子类">
+        <br>
+        <hr>
+        <div class="label_select">
+          <strong>我有了没：</strong><br>
+            <label><input type="radio" name="do_i_have" value="">都要看</label>
+            <label><input type="radio" name="do_i_have" value="true"> 有了</label>
+            <label><input type="radio" name="do_i_have" value="false"> 没有</label>
+        <br>
+        <div class="label_select">
+          <strong>我想要不：</strong><br>
+            <label><input type="radio" name="do_i_want" value="">都要看</label>
+            <label><input type="radio" name="do_i_want" value="true"> 想要</label>
+            <label><input type="radio" name="do_i_want" value="false"> 不想要</label>
+        <br>
+        <br>
+        <div class="label_select">
+            <strong>来源：</strong><br>
+              <label><input type="checkbox" name="best_get_way_zh" value="可制作">可制作</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="豪华家具">豪华家具</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="普通家具商人">普通家具商人</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="成就家具商人">成就家具商人</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="皇冠限定">皇冠限定</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="箱子家具">箱子家具</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="家具包">家具包</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="考古">考古</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="掉落">掉落</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="best_get_way_zh" value="其他">其他</label>&nbsp;&nbsp;&nbsp;
+            <br>
+            <hr>
+            <strong>颜色：</strong><br>
+              <label><input type="checkbox" name="tag1" value="红">红</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="蓝">蓝</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="绿">绿</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="黄">黄</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="橙">橙</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="粉">粉</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="紫">紫</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="棕">棕</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="白">白</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="黑">黑</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="灰">灰</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="铜">铜</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="银">银</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag1" value="金">金</label>&nbsp;&nbsp;&nbsp;
+            <br>
+            <hr>
+            <strong>材质：</strong><br>
+              <label><input type="checkbox" name="tag2" value="木质">木质</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="金属">金属</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="石质">石质</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="玻璃">玻璃</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="水晶及宝石">水晶及宝石</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="沙">沙</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="粉末">粉末</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="皮毛">皮毛</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="布料">布料</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="织物">织物</label>&nbsp;&nbsp;&nbsp;<br>
+              <label><input type="checkbox" name="tag2" value="纸质">纸质</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="骨质">骨质</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="植物">植物</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="肉类">肉类</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="食物">食物</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="蜡烛">蜡烛</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="生物">生物</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="尸体">尸体</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="液体">液体</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="火焰">火焰</label>&nbsp;&nbsp;&nbsp;<br>
+              <label><input type="checkbox" name="tag2" value="冰霜">冰霜</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="光">光</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="迷雾">迷雾</label>&nbsp;&nbsp;&nbsp;
+            <br>
+            <hr>
+            <strong>风格：</strong><br>
+              <label><input type="checkbox" name="tag3" value="现代">现代</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="传统">传统</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="乡土">乡土</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="暖色">暖色</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="冷色">冷色</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="居家">居家</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="梦幻">梦幻</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="恐怖">恐怖</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="血腥">血腥</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag3" value="破损">破损</label>&nbsp;&nbsp;&nbsp;
+            <br>
+            <br>
+        <button type="submit">查询</button>
+    </form>
+
+    <div class="results" id="results">
+        <!-- 查询结果将动态插入到这里 -->
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // 阻止表单默认提交行为
+
+            // 获取表单数据
+            const formData = new FormData(event.target);
+            const params = new URLSearchParams(formData).toString();
+
+            // 调用后端接口
+            try {
+                const response = await fetch(`http:\/\/127.0.0.1:8080/search?${params}`);
+                if (!response.ok) {
+                    throw new Error('网络响应异常');
+                }
+                const data = await response.json();
+
+                // 清空之前的查询结果
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+
+                // 渲染查询结果
+                if (! data || data.length === 0) {
+                    resultsDiv.innerHTML = '<p><strong>屁也没有<strong></p>';
+                } else {
+                    const resultsTable = document.createElement('table');
+                    const resultsTbody = document.createElement('tbody');
+                    
+                    data.forEach(item => {
+                      const tr = document.createElement('tr'); // 创建一个新的表格行元素
+                      const itemDiv = document.createElement('div');
+                      itemDiv.style.height = "378px";
+                      itemDiv.className = 'item';
+                      itemDiv.innerHTML = `
+                          <h3>${item.f_name_zh}</h3>
+                          <p><strong>颜色：</strong>${item.tag1}</p>
+                          <p><strong>材质：</strong>${item.tag2}</p>
+                          <p><strong>风格：</strong>${item.tag3}</p>
+                          <p><strong>分类：</strong>${item.main_category_zh} - ${item.sub_category_zh}</p>
+                          <p><strong>怎么获得：</strong>${item.get_category_zh}</p>
+                          <p><strong>具体来说就是：</strong>${item.best_get_way_zh}</p>
+                          <p><strong>去哪制作：</strong>${item.station_zh}</p>
+                          <p><strong>图纸是：</strong>${item.recipe_name_zh}</p>
+                          <p><strong>要这些材料：</strong>${item.recipe_material_zh}</p>
+                          <p><strong>我有了没：</strong>${item.do_i_have? '有了':'还没'} <button class="mark-btn" data-f-name-zh="${item.f_name_zh}" data-mark-type="have">我已经有了</button></p>
+                          <p><strong>我想要不：</strong>${item.do_i_want? '想要':'不想'} <button class="mark-btn" data-f-name-zh="${item.f_name_zh}" data-mark-type="want">我想要哦</button></p>
+                       `;
+                      const imageCell = document.createElement('td'); // 创建一个新的单元格元素
+                      const image = document.createElement('img');
+                      image.src = `data:image/png;base64,${item.pic}`;
+                      image.alt = "图片";
+                      image.style.maxWidth = "400px";
+                      image.style.height = "400px";
+                      imageCell.appendChild(image); // 将图片添加到单元格中
+                      
+                      tr.appendChild(itemDiv); // 将 div 添加到表格行中
+                      tr.appendChild(imageCell); // 将图片单元格添加到表格行中
+                      resultsTbody.appendChild(tr); // 将表格行添加到表格体中
+                    });
+                    resultsTable.appendChild(resultsTbody)
+                    resultsDiv.appendChild(resultsTable)
+                    // 为所有按钮绑定点击事件
+                    document.querySelectorAll('.mark-btn').forEach(button => {
+                      button.addEventListener('click', async () => {
+                        const fNameZh = button.getAttribute('data-f-name-zh');
+                        const markType = button.getAttribute('data-mark-type');
+                        try {
+                          // 发送请求到后端
+                          const response = await fetch(`http://127.0.0.1:8080/mark?f_name_zh=${encodeURIComponent(fNameZh)}&mark_type=${markType}`, {
+                          method: 'POST',
+                        });
+
+                        if (!response.ok) {
+                          throw new Error('请求失败');
+                        } else {
+                          alert('标记成功');
+                        }
+
+                      } catch (error) {
+                        console.error('标记失败：', error);
+                        alert('标记失败，请稍后重试。');
+                      }
+                    });
+                });
+              }
+            } catch (error) {
+                console.error('查询失败：', error);
+                alert('查询失败，请稍后重试。');
+            }
+        });
+        
+
+    </script>
+</body>
+</html>
