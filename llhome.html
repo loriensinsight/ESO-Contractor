@@ -36,9 +36,31 @@
 <body>
     <h1>家具查询</h1>
     <form class="search-form" id="searchForm">
+      <div class="label_select">
         <input type="text" name="f_name_zh" placeholder="名称">
-        <input type="text" name="get_category_zh" placeholder="分类大类">
-        <input type="text" name="sub_category_zh" placeholder="分类子类">
+        <select id="mainType" name="main_category_zh" @change="changeSubType($event)">
+          <option value="所有大类">请选择家具大类</option>
+          <option value="所有大类">所有大类</option>
+          <option value="温室">温室</option>
+          <option value="庭院">庭院</option>
+          <option value="餐厅">餐厅</option>
+          <option value="画廊">画廊</option>
+          <option value="火炉">火炉</option>
+          <option value="图书馆">图书馆</option>
+          <option value="照明">照明</option>
+          <option value="杂项">杂项</option>
+          <option value="客厅">客厅</option>
+          <option value="服务">服务</option>
+          <option value="结构">结构</option>
+          <option value="套房">套房</option>
+          <option value="地下室">地下室</option>
+          <option value="工坊">工坊</option>
+        </select>
+        <select id="subType" name="sub_category_zh">
+          <option value="所有小类">请选择家具小类</option>
+        </select>
+      </div>  
+      <div class="label_select">
         <br>
         <hr>
         <div class="label_select">
@@ -46,12 +68,14 @@
             <label><input type="radio" name="do_i_have" value="">都要看</label>
             <label><input type="radio" name="do_i_have" value="true"> 有了</label>
             <label><input type="radio" name="do_i_have" value="false"> 没有</label>
+        </div>  
         <br>
         <div class="label_select">
           <strong>我想要不：</strong><br>
             <label><input type="radio" name="do_i_want" value="">都要看</label>
             <label><input type="radio" name="do_i_want" value="true"> 想要</label>
             <label><input type="radio" name="do_i_want" value="false"> 不想要</label>
+        </div>  
         <br>
         <br>
         <div class="label_select">
@@ -122,6 +146,7 @@
               <label><input type="checkbox" name="tag3" value="恐怖">恐怖</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag3" value="血腥">血腥</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag3" value="破损">破损</label>&nbsp;&nbsp;&nbsp;
+            </div> 
             <br>
             <br>
         <button type="submit">查询</button>
@@ -130,7 +155,7 @@
     <div class="results" id="results">
         <!-- 查询结果将动态插入到这里 -->
     </div>
-
+    <script type="text/javascript" src="resources/jquery.js"></script>
     <script>
         document.getElementById('searchForm').addEventListener('submit', async function (event) {
             event.preventDefault(); // 阻止表单默认提交行为
@@ -138,6 +163,7 @@
             // 获取表单数据
             const formData = new FormData(event.target);
             const params = new URLSearchParams(formData).toString();
+            console.log(params)
 
             // 调用后端接口
             try {
@@ -221,7 +247,47 @@
             }
         });
         
-
+        $(function (){
+        // 根据查询大类的变化，生成对应的小类
+        $("#mainType").change(function () {
+            // 小类数据
+            let subTypeData = [
+                {main_type:"所有大类", sub_types: ["所有小类"]},
+                {main_type:"温室", sub_types:["树", "水生植物", "巨树", "蕨类", "花", "蘑菇", "藤蔓", "植物", "灌木", "巨石", "石头与卵石", "树苗", "树篱", "水晶", "枯木", "冰雪"]},
+                {main_type:"庭院", sub_types:["井", "雕像", "支柱", "喷泉", "载具", "后院装饰品)"]},
+                {main_type:"餐厅", sub_types:["椅子", "桌子", "长凳", "柜台)"]},
+                {main_type:"画廊", sub_types:["艺术品", "王座", "展示柜", "挂饰", "绘画", "荣誉及奖励", "ESO Plus", "无畏者半身像", "无畏者战利品"]},
+                {main_type:"火炉", sub_types:["储物室", "橱柜", "茶具", "盘子", "陶器", "厨具", "餐食", "野味", "篮子和袋子", "餐具", "肉类与奶酪", "洗衣用具", "面包与甜点", "农产品"]},
+                {main_type:"图书馆", sub_types:["多层架", "书桌", "补给", "文学名著", "地图)"]},
+                {main_type:"照明", sub_types:["火盆", "灯笼", "灯柱", "蜡烛", "油灯", "吊灯", "烛灯", "明火", "魔灯"]},
+                {main_type:"杂项", sub_types:["生物", "环境", "通用)"]},
+                {main_type:"客厅", sub_types:["地毯与桌毯", "旗帜", "茶几", "挂毯", "花瓶", "沙发及长椅", "小摆设", "乐器)"]},
+                {main_type:"服务", sub_types:["制作台", "训练假人", "梦达思之石", "音乐盒", "陷阱", "吸血鬼设施", "恢复", "商人助手", "军械助手", "银行助手", "分解助手", "月之勇士石板", "S存储", "房客", "时间控制"]},
+                {main_type:"结构", sub_types:["帐篷", "建筑", "建筑部件", "石块", "平台", "木板", "门栏", "墙壁与栅栏", "架子"]},
+                {main_type:"套房", sub_types:["寝具", "梳妆台", "衣箱", "衣柜", "镜子", "床头柜", "屏风", "沐浴用品", "枕头"]},
+                {main_type:"地下室", sub_types:["神圣物件", "水盆", "刑具", "瓮", "熏香", "象征性装饰", "陪葬品", "残骸", "灵魂石"]},
+                {main_type:"工坊", sub_types:["凳子", "工具", "货物", "材料", "机械", "管道和机关"]}
+            ]
+            // 重置小类
+            $("#subType").empty()
+            let mainType = this.value
+            if(mainType=="All(所有大类)"){
+                $("#subType").html("<option value=\"All(所有小类)\">All(所有小类)</option>")
+            }
+            else{
+                $("#subType").html("<option value=\"All(所有小类)\">All(所有小类)</option>")
+                for(let i=0;i<subTypeData.length;i++){
+                    if(mainType == subTypeData[i].main_type){
+                        for(let j=0;j<subTypeData[i].sub_types.length;j++){
+                            let option = document.createElement("option");
+                            option.innerText=subTypeData[i].sub_types[j];
+                            $("#subType").append(option);
+                        }
+                    }
+                }
+            }
+        });
+      });
     </script>
 </body>
 </html>
