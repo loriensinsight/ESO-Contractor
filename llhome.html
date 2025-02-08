@@ -33,14 +33,15 @@
         }
     </style>
 </head>
+
 <body>
     <h1>家具查询</h1>
+  <div class="panel-body">
     <form class="search-form" id="searchForm">
-      <div class="label_select">
         <input type="text" name="f_name_zh" placeholder="名称">
         <select id="mainType" name="main_category_zh" @change="changeSubType($event)">
-          <option value="所有大类">请选择家具大类</option>
-          <option value="所有大类">所有大类</option>
+          <option value="">请选择家具大类</option>
+          <option value="">所有大类</option>
           <option value="温室">温室</option>
           <option value="庭院">庭院</option>
           <option value="餐厅">餐厅</option>
@@ -57,12 +58,12 @@
           <option value="工坊">工坊</option>
         </select>
         <select id="subType" name="sub_category_zh">
-          <option value="所有小类">请选择家具小类</option>
+          <option value="">请选择家具小类</option>
         </select>
       </div>  
       <div class="label_select">
         <br>
-        <hr>
+        <hr><td>
         <div class="label_select">
           <strong>我有了没：</strong><br>
             <label><input type="radio" name="do_i_have" value="">都要看</label>
@@ -119,8 +120,8 @@
               <label><input type="checkbox" name="tag2" value="粉末">粉末</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag2" value="皮毛">皮毛</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag2" value="布料">布料</label>&nbsp;&nbsp;&nbsp;
-              <label><input type="checkbox" name="tag2" value="织物">织物</label>&nbsp;&nbsp;&nbsp;<br>
-              <label><input type="checkbox" name="tag2" value="纸质">纸质</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="织物">织物</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="纸质">纸质</label>&nbsp;&nbsp;&nbsp;<br>
               <label><input type="checkbox" name="tag2" value="骨质">骨质</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag2" value="植物">植物</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag2" value="肉类">肉类</label>&nbsp;&nbsp;&nbsp;
@@ -129,10 +130,10 @@
               <label><input type="checkbox" name="tag2" value="生物">生物</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag2" value="尸体">尸体</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag2" value="液体">液体</label>&nbsp;&nbsp;&nbsp;
-              <label><input type="checkbox" name="tag2" value="火焰">火焰</label>&nbsp;&nbsp;&nbsp;<br>
+              <label><input type="checkbox" name="tag2" value="火焰">火焰</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag2" value="冰霜">冰霜</label>&nbsp;&nbsp;&nbsp;
               <label><input type="checkbox" name="tag2" value="光">光</label>&nbsp;&nbsp;&nbsp;
-              <label><input type="checkbox" name="tag2" value="迷雾">迷雾</label>&nbsp;&nbsp;&nbsp;
+              <label><input type="checkbox" name="tag2" value="迷雾">迷雾</label>&nbsp;&nbsp;&nbsp;<br>
             <br>
             <hr>
             <strong>风格：</strong><br>
@@ -151,7 +152,6 @@
             <br>
         <button type="submit">查询</button>
     </form>
-
     <div class="results" id="results">
         <!-- 查询结果将动态插入到这里 -->
     </div>
@@ -271,11 +271,11 @@
             // 重置小类
             $("#subType").empty()
             let mainType = this.value
-            if(mainType=="All(所有大类)"){
-                $("#subType").html("<option value=\"All(所有小类)\">All(所有小类)</option>")
+            if(mainType==""){
+                $("#subType").html("<option value=\"\">All(所有小类)</option>")
             }
             else{
-                $("#subType").html("<option value=\"All(所有小类)\">All(所有小类)</option>")
+                $("#subType").html("<option value=\"\">All(所有小类)</option>")
                 for(let i=0;i<subTypeData.length;i++){
                     if(mainType == subTypeData[i].main_type){
                         for(let j=0;j<subTypeData[i].sub_types.length;j++){
